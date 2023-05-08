@@ -35,16 +35,29 @@ public class ShopRepositoryTest {
             repository.removeById(6);
         });
     }
+
     @Test
-    public void test3(){
+    public void test3() {
         repository.add(product1);
         repository.add(product2);
         repository.add(product3);
         repository.add(product4);
         repository.add(product5);
-        Product[]expected = {product1, product2, product3, product4, product5};
-        Product[]actual = repository.findAll();
+        Product[] expected = {product1, product2, product3, product4, product5};
+        Product[] actual = repository.findAll();
         Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void test4() {
+        repository.add(product1);
+        repository.add(product2);
+        repository.add(product3);
+        repository.add(product4);
+        repository.add(product5);
+        Assertions.assertThrows(AlreadyExistException.class, () -> {
+            repository.add(product3);
+        });
     }
 
 }

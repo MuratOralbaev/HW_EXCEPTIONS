@@ -16,8 +16,14 @@ public class ShopRepository {
         for (int i = 0; i < current.length; i++) {
             tmp[i] = current[i];
         }
+        for (Product targetProduct : products) {
+            if (targetProduct.getId() == product.getId()) {
+                throw new AlreadyExistException("Товар с таким ID (" + targetProduct.getId() + ") уже есть");
+            }
+        }
         tmp[tmp.length - 1] = product;
         return tmp;
+
     }
 
     public void setProducts(Product[] products) {
@@ -35,7 +41,7 @@ public class ShopRepository {
         //setProducts(tmp);
         //for (Product targetProduct : products) {
         //    if (targetProduct.getId() == product.getId()) {
-        //        throw new AlreadyExistException("Товар с таким ID (" + targetProduct.getId() + ") уже есть");
+        //
         //    }
         //}
 
